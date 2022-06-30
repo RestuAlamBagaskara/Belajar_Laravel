@@ -17,12 +17,14 @@ class RoutingTest extends TestCase
 
     public function testRedirect()
     {
+        //melakukan test pada redirect route
         $this->get('/youtube')
             ->assertRedirect('/alam');
     }
 
     public function testFallback()
     {
+        //melakukan testing pada fallback route
         $this->get('/tidakada')
             ->assertSeeText('404 by Alam');
 
@@ -35,6 +37,7 @@ class RoutingTest extends TestCase
 
     public function testRouteParameter()
     {
+        //melakukan testing pada route parameters
         $this->get('/products/1')
             ->assertSeeText('Product 1');
 
@@ -50,6 +53,7 @@ class RoutingTest extends TestCase
 
     public function testRouteParameterRegex()
     {
+        //melakukan test pada route parametes dengan regex
         $this->get('/categories/100')
             ->assertSeeText('Category 100');
 
@@ -59,6 +63,7 @@ class RoutingTest extends TestCase
 
     public function testRouteParameterOptional()
     {
+        //melakukan test route parameters optional
         $this->get('/users/alam')
             ->assertSeeText('User alam');
 
@@ -68,6 +73,7 @@ class RoutingTest extends TestCase
 
     public function testRouteConflict()
     {
+        //melakukan test route parameters yang mengalami conflict
         $this->get('/conflict/budi')
             ->assertSeeText("Conflict budi");
 
@@ -77,6 +83,7 @@ class RoutingTest extends TestCase
 
     public function testNamedRoute()
     {
+        //melakukan test route parameters yang diberi nama
         $this->get('/produk/12345')
             ->assertSeeText('Link http://localhost/products/12345');
 

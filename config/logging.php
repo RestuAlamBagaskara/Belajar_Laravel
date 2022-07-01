@@ -53,7 +53,8 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            // membuat Multiple Log Channel
+            'channels' => ['single', 'slack', 'stderr'],
             'ignore_exceptions' => false,
         ],
 
@@ -96,6 +97,18 @@ return [
             'formatter' => env('LOG_STDERR_FORMATTER'),
             'with' => [
                 'stream' => 'php://stderr',
+            ],
+        ],
+
+        //menambahkan channel
+        'file' => [
+            'driver' => 'monolog',
+            'level' => env('LOG_LEVEL', 'debug'),
+            'handler' => StreamHandler::class,
+            //Membuat file dalam betuk json dengan formatter
+            'formatter' => \Monolog\Formatter\JsonFormatter::class,
+            'with' => [
+                'stream' => storage_path("logs/application.log"),
             ],
         ],
 

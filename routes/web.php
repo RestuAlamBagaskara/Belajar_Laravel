@@ -119,6 +119,7 @@ Route::get('/redirect/to', [\App\Http\Controllers\RedirectController::class, 're
 Route::get('/redirect/name', [\App\Http\Controllers\RedirectController::class, 'redirectName']);
 Route::get('/redirect/name/{name}', [\App\Http\Controllers\RedirectController::class, 'redirectHello'])
     ->name('redirect-hello');
+
 Route::get('/redirect/named', function (){
 //    return route('redirect-hello', ['name' => 'alam']);
 //    return url()->route('redirect-hello', ['name' => 'alam']);
@@ -128,6 +129,8 @@ Route::get('/redirect/named', function (){
 Route::get('/redirect/action', [\App\Http\Controllers\RedirectController::class, 'redirectAction']);
 Route::get('/redirect/away', [\App\Http\Controllers\RedirectController::class, 'redirectAway']);
 
+//menggunakan middleware dalam route
+//menggunnakan middleware group dalam route
 Route::middleware(['contoh:PZN,401'])->prefix('/middleware')->group(function (){
     Route::get('/api', function (){
         return "OK";
@@ -142,6 +145,9 @@ Route::get('/url/action', function (){
     // return url()->action([\App\Http\Controllers\FormController::class, 'form'], []);
     return \Illuminate\Support\Facades\URL::action([\App\Http\Controllers\FormController::class, 'form'], []);
 });
+
+//mencoba CSRF tokenRoute Controller
+
 Route::get('/form', [\App\Http\Controllers\FormController::class, 'form']);
 Route::post('/form', [\App\Http\Controllers\FormController::class, 'submitForm']);
 
@@ -156,6 +162,7 @@ Route::get('/error/sample', function (){
     throw new Exception("Sample Error");
 });
 
+//mengembalikan exception error 
 Route::get('/error/manual', function (){
     report(new Exception("Sample Error"));
     return "OK";
@@ -172,3 +179,4 @@ Route::get('/abort/401', function (){
 Route::get('/abort/500', function (){
     abort(500);
 });
+
